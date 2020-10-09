@@ -23,12 +23,20 @@ $ cd web-front-end
 $ yarn init -y  
 $ mkdir src; cd src
 $ touch index.js  
+$ cd ..
 ```
 
 ```javascript
-// web-front-end/index.js
+// web-front-end/src/index.js
+const rootEl = document.getElementById('root');
 
-console.log('hello world!');
+const content = document.createElement('p')
+content.innerText = "Hello World!"
+content.className = "error-text"
+
+rootEl.appendChild(content)
+
+console.log("you're so great!");
 ```
 
 ### Set babel & webpack config file
@@ -36,25 +44,26 @@ console.log('hello world!');
 ```
 // web-front-end/  
 $ touch webpack.config.js  
-$ yarn add -D webpack webpack-cli babel-loader @babel/core @babel/cli @babel/preset-env @babel/plugin-proposal-class-properties  
+$ yarn add -D webpack webpack-cli babel-loader @babel/core @babel/cli @babel/preset-env @babel/plugin-proposal-class-properties 
 ```
 
 ```javascript
 // web-front-end/webpack.config.js  
+const path = require('path');
 
 module.exports = {
   mode: 'development',  
   entry: './src/index.js',  
   output: {  
     filename: "[name].js",  
-    path: path.resolve(__dirname, 'dist/js'),  
+    path: path.resolve(__dirname, 'dist'),  
   },  
   module: {  
     rules: [  
       {  
         test: /\.js$/,  
         include: [  
-          path.resolve(__dirname, 'src/js')  
+          path.resolve(__dirname, 'src')  
         ],  
         exclude: /node_modules/,  
         use: {  
@@ -74,6 +83,15 @@ module.exports = {
 ```
 // web-front-end/  
 $ npx webpack --mode development --entry ./src/index.js --output dist/main.js  
+Hash: 05c5ce768ee6073b5403
+Version: webpack 4.44.2
+Time: 38ms
+Built at: 10/09/2020 11:26:43 PM
+      Asset      Size  Chunks                   Chunk Names
+    main.js  3.78 KiB    null  [emitted]        null
+main.js.map   3.6 KiB    null  [emitted] [dev]  null
+Entrypoint null = main.js main.js.map
+[./src/index.js] 28 bytes {null} [built]
 ```
 
 ### Set script to package.json
@@ -82,19 +100,66 @@ $ npx webpack --mode development --entry ./src/index.js --output dist/main.js
 // web-front-end/package.json  
 ...(생략)...  
   "scripts": {  
-    "build": "webpack -w"  
+    "build": "webpack"  
   },  
 ...(생략)...  
 ```
 
 ```bash
-$ npm build  
+$ yarn build  
 ```
+
+### Set HTML and check code
+
+```bash
+// web-front-end/
+$ mkdir public; cd public
+$ touch index.html
+$ cd ..
+```
+
+```html
+<!-- web-front-end/public/index.html -->  
+<!DOCTYPE html>  
+<html>  
+  <head>  
+    <title>Learn Web</title>  
+  </head>  
+  <body>  
+    <div id='root'>
+    <script src="../dist/main.js"></script>
+  </body>  
+</html>  
+```
+
+1. run html(click web-front-end/public/index.html) in **browser**!  
+2. view **"Hello world!"** content!  
+3. check console tab in **browser's developer tool**!  
 
 ### Set CSS 
 
 ```bash
+// web-front-end/
+$ cd src
+$ touch index.css
 $ yarn add -D css-loader style-loader  
+```
+
+```css
+/* web-front-end/src/index.css */
+
+.error-text {
+    color: red;
+}
+```
+
+```javascript
+/* web-front-end/src/index.js */
+
+import './index.css'
+
+...(생략)...  
+
 ```
 
 ```javascript
@@ -103,13 +168,13 @@ $ yarn add -D css-loader style-loader
 module.exports = {  
 ...(생략)...  
   module: {  
-    rules: [  
+    rules: [{
       ...(생략)...  
       },  
       // loader는 배열로 설정할 시 뒤부터 동작  
       {  
         test: /\.css$/,  
-        use: ["css-loader","style-loader"],  
+        use: ["style-loader", "css-loader"],  
       },  
     ]  
   },  
@@ -122,10 +187,22 @@ module.exports = {
 
 ```bash
 $ yarn add -D html-webpack-plugin clean-webpack-plugin  
-$ mkdir public; cd public
-$ touch index.html
 ```
 
+```html
+<!-- web-front-end/public/index.html -->  
+<!DOCTYPE html>  
+<html>  
+  <head>  
+    <title>Learn Web</title>  
+  </head>  
+  <body>  
+    <div id='root'>
+    <!-- delete script tag -->
+    <!-- <script src="../dist/main.js"></script> -->
+  </body>  
+</html>  
+```
 
 ```javascript
 // web-front-end/webpack.config.js  
@@ -133,10 +210,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");  
 
 module.exports {  
+  ...(생략)...  
   plugins: [  
     new CleanWebpackPlugin(),  
     new HtmlWebpackPlugin({  
-      template: './src/index.html', // 템플릿 경로를 지정  
+      template: './public/index.html', // 템플릿 경로를 지정  
       templateParameters: { // 템플릿에 주입할 파라매터 변수 지정  
         env: process.env.NODE_ENV === 'development' ? '(개발 버전)' : '',  
       },  
@@ -147,22 +225,19 @@ module.exports {
       } : false,  
     })  
   ]  
+  ...(생략)...  
 }  
 ```
 
-```html
-<!-- web-front-end/public/index.html -->  
-<!DOCTYPE html>  
-<html>  
-  <head>  
-    <title>타이틀<%= env %></title>  
-  </head>  
-  <body>  
-  </body>  
-</html>  
-```
+1. run new html(click web-front-end/dist/index.html) in **browser**!  
+2. view **"Hello world!"** content!  
+3. check console tab in **browser's developer tool**!  
 
 ### Set HMR(Hot Module Reloading)
+
+```bash
+$ yarn add -D webpack-dev-server  
+```
 
 ```javascript
 // web-front-end/webpack.config.js  
@@ -195,3 +270,8 @@ module.exports = {
 // web-front-end/  
 $ yarn start  
 ```
+
+1. go to development page(http://127.0.0.1:3000/) in **browser**!  
+2. view **"Hello world!"** content!  
+3. check console tab in **browser's developer tool**!  
+4. check when modify your src files, **reload** development page!  
