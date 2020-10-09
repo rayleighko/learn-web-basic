@@ -71,3 +71,13 @@ $ npx babel-node index.js
 ```bash
 $ npm start
 ```
+
+### babel?
+
+babel은 transpiler의 일종이고, transpiler는 compiler의 일종이다. 
+
+컴파일러는 C언어 -(컴파일러)> 어셈블리 -(어셈블러)> 기계어
+
+트렌스파일러 ES6의 자바스크립트 -(트랜스파일러)> ES5의 자바스크립트
+
+Node는 ES6의 문법을 이해하지 못하기 때문에 ES6와 node를 사용한 개발 환경에서는 Babel과 같은 트랜스파일러가 필요하다.
