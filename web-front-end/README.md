@@ -275,3 +275,11 @@ $ yarn start
 2. view **"Hello world!"** content!  
 3. check console tab in **browser's developer tool**!  
 4. check when modify your src files, **reload** development page!  
+
+> 진행이 완료된 결과는 result 디렉터리에서 확인하실 수 있습니다!
+
+```bash
+// web-front-end/  
+$ cd result
+$ yarn start
+```
