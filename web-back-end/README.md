@@ -69,7 +69,15 @@ $ npx babel-node index.js
 ```
 
 ```bash
-$ npm start
+$ yarn start
+```
+
+> 진행이 완료된 결과는 result 디렉터리에서 확인하실 수 있습니다!
+
+```bash
+// web-front-end/  
+$ cd result
+$ yarn start
 ```
 
 ### babel?
