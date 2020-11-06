@@ -1,20 +1,21 @@
-# 웹 인프라 구축
+# 3. Web Front end With S3 & CF
 
 - AWS CLI
-- AWS S3(static web page use http)
-- AWS Cloud Front(for https)
+- [AWS S3(static web page use http)](https://aws.amazon.com/ko/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Categories=categories%23storage&trk=ps_a134p000006gGiOAAU&trkCampaign=acq_paid_search_brand&sc_channel=PS&sc_campaign=acquisition_KR&sc_publisher=Google&sc_category=Storage&sc_country=KR&sc_geo=APAC&sc_outcome=acq&sc_detail=aws%20s3&sc_content=S3_e&sc_matchtype=e&sc_segment=477202843563&sc_medium=ACQ-P|PS-GO|Brand|Desktop|SU|Storage|S3|KR|EN|Text&s_kwcid=AL!4422!3!477202843563!e!!g!!aws%20s3&ef_id=CjwKCAiA4o79BRBvEiwAjteoYNuVPS4I61YwMF7RZskJtgzHBRryPqEkhWYVZKoWL_sOLPZLVuXKwhoCen4QAvD_BwE:G:s&s_kwcid=AL!4422!3!477202843563!e!!g!!aws%20s3)
+- [AWS Cloud Front(for https)](https://aws.amazon.com/ko/cloudfront/)
 
 ## 사전 준비물
 
-- 콘솔 혹은 CLI로 생성된 s3 버킷
-- 콘솔 혹은 CLI로 생성된 cloudfront
+- 콘솔 혹은 CLI로 생성된 S3 버킷
+- 콘솔 혹은 CLI로 생성된 Cloudfront
 
 ## build front-end project
 
 사전에 개발했던 웹 프로젝트를 webpack과 같은 번들러를 사용해 빌드하고, 그 결과물을 현재 디렉터리에 옮겨온다.
 
 ```bash
-// learn-web-basic/web-front-end/result
+// /learn-web-basic
+$ cd web-front-end/webpack_react/result
 $ yarn
 $ yarn build
 $ mv dist ../../web-infra/web-front-end_s3_cf/
