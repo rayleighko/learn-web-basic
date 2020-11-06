@@ -69,10 +69,10 @@ aws-cli/2.0.56 Python/3.7.7 Windows/10 exe/AMD64
 
 ```bash
 $ aws configure --profile=learning
-AWS Access Key ID [None]: 
-AWS Secret Access Key [None]: 
-Default region name [None]: 
-Default output format [None]: 
+AWS Access Key ID [None]: ***
+AWS Secret Access Key [None]: *** 
+Default region name [None]: ap-northeast-2
+Default output format [None]: json
 ```
 
 1. cat ~/.aws/credentials을 통해 작성된 aws credentials를 확인해보자.  
