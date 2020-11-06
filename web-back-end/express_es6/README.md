@@ -1,4 +1,4 @@
-# 1. Babel With ES6
+# 3. Express With ES6
 
 - Javascript(ES6)  
 - node.js  
@@ -9,10 +9,15 @@
 
 ```json
 // Package Dependencies
-  "@babel/cli": "^7.11.6",
-  "@babel/core": "^7.11.6",
-  "@babel/node": "^7.10.5",
-  "@babel/preset-env": "^7.11.5"
+    "devDependencies": {
+        "@babel/cli": "^7.11.6",
+        "@babel/core": "^7.11.6",
+        "@babel/node": "^7.10.5",
+        "@babel/preset-env": "^7.11.5"
+    },
+    "dependencies": {
+        "express": "^4.17.1"
+    }
 ```
 
 ## Install package manager
