@@ -2,5 +2,9 @@
   "name": "web-front-end_s3_cf",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "deploy": "aws s3 sync ./dist s3://learning.react.ausg --profile=learning",
+    "invalidate": "aws cloudfront create-invalidation --profile=learning --distribution-id E5WLS0E3AECQU --paths / /index.html"
+  },
   "license": "MIT"
 }

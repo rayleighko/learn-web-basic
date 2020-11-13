@@ -17,7 +17,6 @@ $ yarn init -y
 ```
 
 ```json
-
 {
   "name": "web-back-end_ec2",
   "version": "1.0.0",
@@ -25,13 +24,14 @@ $ yarn init -y
   "license": "MIT"
 }
 ```
+
 ## create security group
 
 다음과 같이 scripts에 보안 그룹을 생성해준다.  
 
 ```json
 "scripts":{ 
-    "create_sec_group": "aws ec2 --profile=learningaws create-security-group --group-name Learning-AWS-Security-Group --description "CodeDeploy Example for Learn to AWS"
+    "create_sec_group": "aws ec2 --profile=learning create-security-group --group-name Learning-AWS-Security-Group --description "CodeDeploy Example for Learn to AWS"
 }
 ```
 
@@ -43,16 +43,16 @@ $ yarn init -y
 
 ```json
 "scripts": {
-    "authorize_sec_group:22":"aws ec2 --profile=learningaws authorize-security-group-ingress --group-name Learning-AWS-Security-Group --to-port 22 --ip-protocol tcp --cidr-ip 0.0.0.0/0 --from-port 22",
-    "authorize_sec_group:80":"aws ec2 --profile=learningaws authorize-security-group-ingress --group-name Learning-AWS-Security-Group --to-port 80 --ip-protocol tcp --cidr-ip 0.0.0.0/0 --from-port 80",
-    "authorize_sec_group:3000":"aws ec2 --profile=learningaws authorize-security-group-ingress --group-name Learning-AWS-Security-Group --to-port 3000 --ip-protocol tcp --cidr-ip 0.0.0.0/0 --from-port 3000"
+    "authorize_sec_group:22":"aws ec2 --profile=learning authorize-security-group-ingress --group-name Learning-AWS-Security-Group --to-port 22 --ip-protocol tcp --cidr-ip 0.0.0.0/0 --from-port 22",
+    "authorize_sec_group:80":"aws ec2 --profile=learning authorize-security-group-ingress --group-name Learning-AWS-Security-Group --to-port 80 --ip-protocol tcp --cidr-ip 0.0.0.0/0 --from-port 80",
+    "authorize_sec_group:3000":"aws ec2 --profile=learning authorize-security-group-ingress --group-name Learning-AWS-Security-Group --to-port 3000 --ip-protocol tcp --cidr-ip 0.0.0.0/0 --from-port 3000"
 }
 ```
 
 ## pem key를 활용해 EC2 실행하기(설명만 하고 넘어가기)
 
 "scripts" :{
-    "run-instance": "aws ec2 run-instances --image-id !!!! --key-name @@@@@ --count ##### --instance-type $$$$$$ --iam-instance-profile Name=&&&& --security-groups Learning-AWS-Security-Group"
+    "run-instance": "aws ec2 run-instances --image-id 3 --key-name 3 --count 1 --instance-type t2.micro --security-groups Learning-AWS-Security-Group"
 }
 
 [참고할 자료](https://docs.aws.amazon.com/ko_kr/codedeploy/latest/userguide/instances-ec2-create.html)
@@ -61,4 +61,4 @@ $ yarn init -y
 
 -- 같이 진행
 
-수동으로 git을 설치하고, 받아와서 실행 -> http만을 이용해 API에 접근하기
+- 수동으로 git을 설치하고, 받아와서 실행 -> http만을 이용해 API에 접근하기
